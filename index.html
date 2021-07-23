@@ -21,7 +21,29 @@
     </div>
     <div class="main-container">
         <div class="book-shelf">
+          
+        </div>
+    </div>
+    <div class="form-container">
+        <form name="new-book" action="">
+            <div class="add-header">
+                <h2>Add a Book</h2>
+            </div>
+            <label for="title">Title</label>
+            <input type="text" name='title' id="title-form" required>
+        
+            <label for='author'>Author</label>
+            <input type="text" name='author' id="author-form" required>
 
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id='pages-form' required>
+
+            <label for="pages-read"><b>Pages Read</b></label>
+            <input type="number" name="pages-read" id='pages-read-form' required>
+        </form>
+        <div class="form-buttons">
+            <button onclick="submitForm()"class='submit'>Submit</button>
+            <button onclick="closeForm()">Cancel</button>
         </div>
     </div>
     <div class="bottom-container">

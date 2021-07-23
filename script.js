@@ -46,7 +46,6 @@ function createMenuDiv(book) {
     menuDiv.appendChild(pagesReadDiv)
     menuDiv.appendChild(addButton)
     
-    // Pick up here - add buttons and stuff to book nav menu 
     
     return menuDiv
 
@@ -57,7 +56,7 @@ function createContentDiv(book) {
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('book-content');
 
-    const titleContent = document.createElement('h2');
+    const titleContent = document.createElement('h3');
     titleContent.innerText=book.title;
     titleContent.classList.add('title');
 
@@ -95,6 +94,28 @@ function createFooterDiv() {
     return footerDiv;
 }
 
+function closeForm() {
+    document.querySelector('.form-container').style.display='none';
+    document.querySelector('.main-container').style.display='flex';
+}
+
+function submitForm() {
+
+    document.querySelector('.main-container').style.display='flex';
+
+    const title = document.getElementById("title-form").value
+    const author = document.getElementById('author-form').value
+    const pages = document.getElementById('pages-form').value
+    const pagesRead = document.getElementById('pages-read-form').value
+
+    const book = new Book(title, author, pages,pagesRead,true)
+
+    console.log(book)
+    addBookToLibrary(book)
+
+    closeForm()
+}
+
 function addBookToLibrary(book) { 
     
     const mainContainer = document.querySelector('.book-shelf');
@@ -128,13 +149,10 @@ const addBookButton = document.querySelector('.add-book')
 myLibrary.forEach(book => addBookToLibrary(book));
 
 addBookButton.addEventListener('click', () => {
-    const title = prompt('Book Title');
-    const author = prompt('Author');
-    const pages = prompt('Pages');
-    const pagesRead = prompt('Pages Read')
-
-    const book = new Book(title, author, pages, pagesRead, true)
-    addBookToLibrary(book)
+    document.querySelector('.form-container').style.display='block';
+    document.querySelector('.main-container').style.display='none';
+    // const book = new Book(title, author, pages, pagesRead, true)
+    // addBookToLibrary(book)
 })
 
 
