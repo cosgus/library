@@ -275,8 +275,6 @@ img {
     border-width: 2px;
     justify-content: space-evenly;
     z-index: 1;
-    box-shadow: 0.5rem 0.5rem 0.5rem #a39d8d;
-
 }
 
 .form {
