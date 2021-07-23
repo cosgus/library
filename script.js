@@ -30,21 +30,21 @@ function createMenuDiv(book) {
     const menuDiv = document.createElement('div')
     menuDiv.classList.add('book-menu')
 
-    const editButton = document.createElement('span')
-    editButton.innerText = "edit"
-    editButton.classList.add("material-icons", "book-button", 'edit')
+    const addButton = document.createElement('span')
+    addButton.innerText = "add"
+    addButton.classList.add("material-icons", "book-button", 'add')
 
-    const deleteButton = document.createElement('span')
-    deleteButton.innerText = "delete"
-    deleteButton.classList.add("material-icons", "book-button", 'delete')
+    const subtractButton = document.createElement('span')
+    subtractButton.innerText = "remove"
+    subtractButton.classList.add("material-icons", "book-button", 'subtract')
 
     const pagesReadDiv = document.createElement('div')
     pagesReadDiv.innerText = `${book.pagesRead} pages read`
     pagesReadDiv.classList.add('pages-read')
 
-    menuDiv.appendChild(editButton)
+    menuDiv.appendChild(subtractButton)
     menuDiv.appendChild(pagesReadDiv)
-    menuDiv.appendChild(deleteButton)
+    menuDiv.appendChild(addButton)
     
     // Pick up here - add buttons and stuff to book nav menu 
     
@@ -76,6 +76,25 @@ function createContentDiv(book) {
     return contentDiv;
 }
 
+function createFooterDiv() {
+
+    const footerDiv = document.createElement('div')
+    footerDiv.classList.add('book-footer')
+    const editButton = document.createElement('span')
+    const deleteButton = document.createElement('span')
+
+    editButton.innerText= 'edit';
+    editButton.classList.add('edit-button', 'material-icons');
+
+    deleteButton.innerText = 'delete';
+    deleteButton.classList.add('delete-button', 'material-icons')
+
+    footerDiv.appendChild(editButton);
+    footerDiv.appendChild(deleteButton);
+
+    return footerDiv;
+}
+
 function addBookToLibrary(book) { 
     
     const mainContainer = document.querySelector('.book-shelf');
@@ -90,23 +109,32 @@ function addBookToLibrary(book) {
     const imgDiv = createImgDiv(book);
     const contentDiv = createContentDiv(book);
     const menuDiv = createMenuDiv(book);
+    const footerDiv = createFooterDiv();
 
     bookDiv.appendChild(imgDiv);
-    bookDiv.appendChild(contentDiv)
-    bookDiv.appendChild(menuDiv)
+    bookDiv.appendChild(contentDiv);
+    bookDiv.appendChild(menuDiv);
+    bookDiv.appendChild(footerDiv);
 
     mainContainer.appendChild(bookDiv);
     
 }
 
 
-const book1 = new Book('A Brief History of Time', 'Stephen Hawking', 500, 200, false)
-const book2 = new Book('Atomic Habits', 'James Clear',250, 0, false)
-const book3 = new Book('Stock Market Techniques', 'Richard D. Wyckoff', 95, 20, false)
+
+
 let myLibrary = []
-
-myLibrary.push(book2)
-myLibrary.push(book1)
-myLibrary.push(book3)
-
+const addBookButton = document.querySelector('.add-book')
 myLibrary.forEach(book => addBookToLibrary(book));
+
+addBookButton.addEventListener('click', () => {
+    const title = prompt('Book Title');
+    const author = prompt('Author');
+    const pages = prompt('Pages');
+    const pagesRead = prompt('Pages Read')
+
+    const book = new Book(title, author, pages, pagesRead, true)
+    addBookToLibrary(book)
+})
+
+

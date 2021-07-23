@@ -28,6 +28,7 @@ p {
     font-family: 'Roboto Condensed', sans-serif;
     color: rgb(199, 199, 199);
     font-size: 1rem;
+    margin: 0.7rem 0;
 }
 body {
     font-family: 'Zen Loop', cursive, 'Courier New', Courier, monospace;
@@ -135,6 +136,7 @@ img {
 
 .title {
     margin: 0rem;
+    text-align: center;
     border-bottom: solid;
     border-width: 0.5px;
     border-color:gray;
@@ -169,22 +171,22 @@ img {
     
 }
 
-.edit:hover {
+.add:hover {
     color: rgb(148, 204, 148);;
-    transform: scale(1.2);
+    transform: scale(1.4);
     cursor:grab;
 }
 
-.delete:hover {
+.subtract:hover {
     color: rgb(211, 132, 132);
-    transform: scale(1.2);
+    transform: scale(1.4);
     cursor:grab;
 }
-.delete {
+.subtract {
     color: rgb(245, 192, 192);
 }
 
-.edit {
+.add {
     color: rgb(199, 250, 199);
 }
 
@@ -200,13 +202,13 @@ img {
     color: black;
     opacity: 0.6;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
 }
 
 .add-book:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: grabbing;
-    border-width: 3px;
+    border-width: 1px;
     
 }
 
@@ -218,4 +220,22 @@ img {
 }
 
 
+.book-footer {
+    display:flex;
+    flex-direction: row;
+    justify-content: right;
+    /* margin: 0 1rem; */
+    font-size: 0.5rem;
+    height: 12%;
+    color: rgb(194, 194, 194);
+}
 
+.edit-button {
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.delete-button {
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+}
