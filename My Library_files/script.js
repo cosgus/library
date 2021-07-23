@@ -157,10 +157,8 @@ function deleteCard(e) {
     const bookshelf = bookDiv.parentNode
     bookshelf.removeChild(bookDiv)
     removeBookMyLibrary(bookDiv.id);
-    if (myLibrary.length === 0) {
-        document.querySelector('body').style.justifyContent = 'center'
-    }
 }
+
 function createDeleteListeners() {
     // console.log('create delete listeners');
     const deleteButtons = document.querySelectorAll('.delete-button');
@@ -198,23 +196,18 @@ function getBook(id) {
 function commitChanges(e) {
 
     const bookDiv = document.querySelector('.modifying')
+    console.log(bookDiv)
     const title = document.getElementById("title-form").value
     const author = document.getElementById('author-form').value
     const pages = document.getElementById('pages-form').value
     const pagesRead = document.getElementById('pages-read-form').value
 
     bookDiv.querySelector('.title').innerText = title;
-    bookDiv.querySelector('.author').innerText = `by ${author}`
+    bookDiv.querySelector('.author').innerText = author
     bookDiv.querySelector('.pages').innerText = pages
     bookDiv.querySelector('.pages-read').innerText = `${pagesRead} pages read`
 
     bookDiv.classList.remove('.modifying')
-
-    const book = getBook(bookDiv.id)
-    book.title = title
-    book.author = author
-    book.pages = pages
-    book.pagesRead = pagesRead
 
     resetForm();
     closeForm();
