@@ -1,4 +1,220 @@
+html {
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 8rem;
+    color: white;
+    text-shadow: 2px 2px #4e4e4e;
+    text-decoration: underline;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+h2 {
+    font-size: 1.5rem;
+}
+p {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(199, 199, 199);
+    font-size: 1rem;
+}
 body {
+    font-family: 'Zen Loop', cursive, 'Courier New', Courier, monospace;
+    color: white;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* width: 60%; */
+    margin: 0px;
+    background-image: url('/index.jpeg');
+    /* background: #EDE7D9; */
 }
+
+img {
+    opacity: 0.8;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.top-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+}
+.bottom-container {
+    display: flex;
+    height: 30%
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0px;
+    width: 100%;
+    background: #fffcf6;
+    /* border-style: solid; */
+    /* border-color: rgb(185, 185, 185); */
+    /* border-width: 1px; */
+    box-shadow: 0rem 1rem 2rem #7a776f, 
+                0rem -1rem 2rem #7a776f;
+                /* inset 0rem 0.5rem 0.5rem #7a776f,  */
+                /* inset 0rem -0.5rem 0.5rem #7a776f; */
+    /* background-image: url(https://source.unsplash.com/2000x500?$books); */
+    opacity: 0.75;
+    z-index: 0;
+    /* z-index: 1; */
+    /* box-shadow: 0rem -0.5rem 0.5rem rgb(175, 175, 175); */
+}
+
+.main-container::before {
+    position: absolute;
+    background-image: url(https://source.unsplash.com/2000x500?$books);
+    opacity: 1;
+}
+
+.book-shelf {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    opacity: 1;
+    z-index: 2;
+}
+
+.book {
+    height: 20rem;
+    width: 15rem;
+    background-color: #353535;
+    border-width: 5px;
+    border-color: white;   
+    border-style: solid;
+    border-radius: 2%;
+    box-shadow: 0.3rem 0.3rem 0.3rem #a39d8d,
+                0.3rem -0.1rem 0.3rem #a39d8d,
+                -0.1rem 0.3rem 0.3rem #a39d8d,
+                -0.1rem -0.1rem 0.3rem #a39d8d;
+    margin: 1rem 0.5rem;
+    z-index: 1;
+    
+}
+
+.book-content {
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+}
+
+.img-container {
+    max-height: 35%;
+    height:120px;
+    /* box-shadow: 0 0.2rem 0.2rem rgb(255, 60, 60); */
+}
+
+.book-img {
+    max-width: 100%;
+}
+
+.title {
+    margin: 0rem;
+    border-bottom: solid;
+    border-width: 0.5px;
+    border-color:gray;
+}
+
+.sub-book-content {
+    margin-bottom: 0rem;
+}
+
+.book-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 13%;
+    align-items: center;
+    color: rgb(187, 187, 187);
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    background-color: #4e4e4e;
+}
+
+.pages-read {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(218, 218, 218);
+    font-size: 0.9rem;
+}
+
+.book-button {
+    margin: auto 0px;
+    height:100%;
+    
+}
+
+.edit:hover {
+    color: rgb(148, 204, 148);;
+    transform: scale(1.2);
+    cursor:grab;
+}
+
+.delete:hover {
+    color: rgb(211, 132, 132);
+    transform: scale(1.2);
+    cursor:grab;
+}
+.delete {
+    color: rgb(245, 192, 192);
+}
+
+.edit {
+    color: rgb(199, 250, 199);
+}
+
+.add-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    width: 5rem;
+    height: 5rem;
+    background: white;
+    border-radius: 50%;
+    color: gray;
+    opacity: 0.6;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.add-book:hover {
+    transform: scale(1.2);
+    cursor: grabbing;
+    border-width: 3px;
+    
+}
+
+
+.material-icons {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
