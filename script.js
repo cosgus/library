@@ -10,7 +10,7 @@ function generateId() {
 }
 
 class Book {
-    constructor(title, author, pages, pagesRead, isRead) {
+    constructor(title, author, pages, pagesRead, isRead, url = '') {
 
         this.id = generateId();
         console.log(this.id);
@@ -19,6 +19,7 @@ class Book {
         this.pages = pages;
         this.pagesRead = pagesRead;
         this.isRead = isRead;
+        this.url = url
     }
 }
 
@@ -30,10 +31,14 @@ function createImgDiv(book) {
     img = document.createElement('img');
     img.classList.add('book-img');
 
-    title = book.title;
-    terms = String(title.split(' '));
-    url = `https://source.unsplash.com/500x250?${terms}`;
-
+    if (book.url) {
+        url = book.url
+    }
+    else {
+        title = book.title;
+        terms = String(title.split(' '));
+        url = `https://source.unsplash.com/500x250?${terms}`;
+    }
     img.src = url;
 
     imgDiv.appendChild(img);
@@ -94,8 +99,14 @@ function createFooterDiv() {
 
     const footerDiv = document.createElement('div')
     footerDiv.classList.add('book-footer')
+    const progressBar = document.createElement('progress')
+    const progressBarDiv = document.createElement('div')
     const editButton = document.createElement('span')
     const deleteButton = document.createElement('span')
+
+    
+    progressBarDiv.classList.add('progress-bar')
+    progressBarDiv.appendChild(progressBar)
 
     editButton.innerText= 'edit';
     editButton.classList.add('book-button','edit-button', 'material-icons');
@@ -103,8 +114,10 @@ function createFooterDiv() {
     deleteButton.innerText = 'delete';
     deleteButton.classList.add('book-button','delete-button', 'material-icons')
 
+    footerDiv.appendChild(progressBarDiv);
     footerDiv.appendChild(editButton);
     footerDiv.appendChild(deleteButton);
+    
 
     return footerDiv;
 }
@@ -120,8 +133,9 @@ function submitForm() {
     const author = document.getElementById('author-form').value
     const pages = document.getElementById('pages-form').value
     const pagesRead = document.getElementById('pages-read-form').value
+    const url = document.getElementById('url-form').value
 
-    const book = new Book(title, author, pages,pagesRead,true)
+    const book = new Book(title, author, pages, pagesRead, true, url)
 
     myLibrary.push(book)
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
@@ -164,16 +178,12 @@ function deleteCard(e) {
     }
 }
 function createDeleteListeners() {
-    // console.log('create delete listeners');
-    const deleteButtons = document.querySelectorAll('.delete-button');
-    // console.log(deleteButtons);
+    const deleteButtons = document.querySelectorAll('.delete-button');;
     deleteButtons.forEach(button => button.addEventListener('click', deleteCard));
 }
 
 function createPagesReadListeners() {
-    // console.log('create pages-read listeners')
-    const modifierButtons = document.querySelectorAll('.modifier')
-    
+    const modifierButtons = document.querySelectorAll('.modifier')    
     modifierButtons.forEach(button => button.addEventListener('click', modifyPagesRead))
 }
 
@@ -184,12 +194,22 @@ function modifyPagesRead(e) {
     console.log(Number(pagesRead))
 
     if (e.target.innerText == 'add') {
-        pagesReadDiv.innerText = `${Number(pagesRead)+1} pages read`
+        pagesRead = Number(pagesRead) + 1
+        pagesReadDiv.innerText = `${pagesRead} pages read`
     }
+
     else if (e.target.innerText === 'remove') {
-        pagesReadDiv.innerText = `${Number(pagesRead)-1} pages read`
+        pagesRead = Number(pagesRead) - 1
+        pagesReadDiv.innerText = `${pagesRead} pages read`
     }
-    console.log(e.target.innerText)
+    
+    const book = getBook(bookDiv.id)
+    book.pagesRead = pagesRead
+
+    const progressBar = bookDiv.querySelector('progress');
+    progressBar.value = pagesRead;
+
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
 function getBook(id) {
@@ -199,25 +219,32 @@ function getBook(id) {
 
 function commitChanges(e) {
 
-    const bookDiv = document.querySelector('.modifying')
-    const title = document.getElementById("title-form").value
-    const author = document.getElementById('author-form').value
-    const pages = document.getElementById('pages-form').value
-    const pagesRead = document.getElementById('pages-read-form').value
+    const bookDiv = document.querySelector('.modifying');
+    const title = document.getElementById("title-form").value;
+    const author = document.getElementById('author-form').value;
+    const pages = document.getElementById('pages-form').value;
+    const pagesRead = document.getElementById('pages-read-form').value;
+    const url = document.getElementById('url-form').value;
 
-    bookDiv.querySelector('.title').innerText = title;
-    bookDiv.querySelector('.author').innerText = `by ${author}`
-    bookDiv.querySelector('.pages').innerText = `${pages} pages`
-    bookDiv.querySelector('.pages-read').innerText = `${pagesRead} pages read`
+    bookDiv.querySelector('.title').innerText = title;;
+    bookDiv.querySelector('.author').innerText = `by ${author}`;
+    bookDiv.querySelector('.pages').innerText = `${pages} pages`;
+    bookDiv.querySelector('.pages-read').innerText = `${pagesRead} pages read`;
 
-    bookDiv.classList.remove('.modifying')
+    bookDiv.querySelector('img').src = url;
+    bookDiv.classList.remove('.modifying');
+
+    const progressBar = bookDiv.querySelector('progress');
+    progressBar.value = pagesRead;
 
     const book = getBook(bookDiv.id)
     book.title = title
     book.author = author
     book.pages = pages
     book.pagesRead = pagesRead
+    book.url = url
 
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
     resetForm();
     closeForm();
     
@@ -238,13 +265,13 @@ function modifyBook(e) {
     const id = bookDiv.id
     const book = getBook(id);
 
-
     bookDiv.classList.add('modifying')
 
     form.querySelector('#title-form').value = book.title
     form.querySelector('#author-form').value = book.author
     form.querySelector('#pages-form').value = book.pages
     form.querySelector('#pages-read-form').value = book.pagesRead
+    form.querySelector('#url-form').value = book.url
 
 }
 
@@ -267,7 +294,6 @@ function createEditListeners() {
 }
 
 function createBookEventListeners() {
-
     console.log('create listeners')
     createDeleteListeners();
     createEditListeners();
@@ -293,6 +319,9 @@ function addBookToLibrary(book) {
         const contentDiv = createContentDiv(book);
         const menuDiv = createMenuDiv(book);
         const footerDiv = createFooterDiv();
+        const progressBar = footerDiv.querySelector('progress')
+        progressBar.value = book.pagesRead
+        progressBar.max = book.pages
 
         bookDiv.appendChild(imgDiv);
         bookDiv.appendChild(contentDiv);
@@ -314,6 +343,7 @@ function resetForm() {
     formDiv.querySelector('#author-form').value = '';
     formDiv.querySelector('#pages-form').value = '';
     formDiv.querySelector('#pages-read-form').value = '';
+    formDiv.querySelector('#url-form').value = '';
 }
 
 
