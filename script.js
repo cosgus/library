@@ -236,6 +236,7 @@ function commitChanges(e) {
 
     const progressBar = bookDiv.querySelector('progress');
     progressBar.value = pagesRead;
+    progressBar.max = pages;
 
     const book = getBook(bookDiv.id)
     book.title = title
