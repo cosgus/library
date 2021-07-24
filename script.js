@@ -205,7 +205,7 @@ function commitChanges(e) {
 
     bookDiv.querySelector('.title').innerText = title;
     bookDiv.querySelector('.author').innerText = `by ${author}`
-    bookDiv.querySelector('.pages').innerText = `${pages} read`
+    bookDiv.querySelector('.pages').innerText = `${pages} pages`
     bookDiv.querySelector('.pages-read').innerText = `${pagesRead} pages read`
 
     bookDiv.classList.remove('.modifying')
