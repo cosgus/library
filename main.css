@@ -79,6 +79,7 @@ img {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    max-height: 42rem;
     /* margin: 0 0px;
     border-radius: 2%;
     background: rgba(176, 196, 209, 0.4);
@@ -103,7 +104,10 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    /* max-height: 50%; */
+    overflow: auto;
     justify-content: center;
+    max-height: 100%;
     /* opacity: 1;
     z-index: 2;
     margin: 0 1rem;
