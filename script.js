@@ -124,6 +124,7 @@ function submitForm() {
     const book = new Book(title, author, pages,pagesRead,true)
 
     myLibrary.push(book)
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
     myLibrary.forEach(book => addBookToLibrary(book))
     document.querySelector('body').style.justifyContent='space-evenly';
     resetForm();
@@ -150,6 +151,7 @@ function alreadyAdded(newBook) {
 
 function removeBookMyLibrary(id) {
     myLibrary = myLibrary.filter(book => book.id != id);
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
 function deleteCard(e) {
@@ -315,7 +317,19 @@ function resetForm() {
 }
 
 
-let myLibrary = []
+if (!localStorage.getItem('myLibrary')) {
+    myLibrary = []
+    document.querySelector('body').style.justifyContent='center'
+}
+else {
+    myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
+    document.querySelector('body').style.justifyContent='space-evenly';
+}
+
+if (myLibrary.length === 0) {
+    document.querySelector('body').style.justifyContent='center'
+}
+
 const addBookButton = document.querySelector('.add-book')
 myLibrary.forEach(book => addBookToLibrary(book));
 document.querySelector('.submit').addEventListener('click', submitForm);
@@ -326,7 +340,5 @@ addBookButton.addEventListener('click', () => {
     // const book = new Book(title, author, pages, pagesRead, true)
     // addBookToLibrary(book)
 })
-
-
 
 
